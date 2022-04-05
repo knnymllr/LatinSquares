@@ -67,9 +67,10 @@ int main()
 
         r = (b * k) / v;
         lambda = (r * (k - 1)) / (v - 1);
-        if (b * k != v * r || (lambda * (v - 1) != r * (k - 1)))
+        if (b * k != v * r || (lambda * (v - 1) != r * (k - 1))) {
+            printf("\n(b = %d | v = %d | k = %d | r = %d | lambda = %d)\n", b, v, k, r, lambda);
             printf("This is an impossible configuration!\n");
-        else
+        } else
             printf("\n(b = %d | v = %d | k = %d | r = %d | lambda = %d)\n", b, v, k, r, lambda);
 
         printf("(-1 to quit) Press any number to continue: ");
