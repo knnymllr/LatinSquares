@@ -7,22 +7,26 @@ void print_pairs(int a[NUM][NUM], int b[NUM][NUM]);
 
 int main()
 {
-        // Problem 1
-        // Initialize 6 example matricies
-        int A[NUM][NUM] = {{1, 2, 3, 4}, {2, 1, 4, 3}, {3, 4, 1, 2}, {4, 3, 2, 1}};
-        int B[NUM][NUM] = {{1, 4, 2, 3}, {2, 3, 1, 4}, {3, 2, 4, 1}, {4, 1, 3, 2}};
-        int C[NUM][NUM] = {{1, 2, 4, 3}, {2, 1, 3, 4}, {3, 4, 2, 1}, {4, 3, 1, 2}};
-        int D[NUM][NUM] = {{1, 2, 3, 4}, {2, 1, 4, 3}, {4, 3, 2, 1}, {3, 4, 1, 2}};
-        int E[NUM][NUM] = {{1, 3, 2, 4}, {4, 2, 3, 1}, {3, 1, 4, 2}, {2, 4, 1, 3}};
-        int F[NUM][NUM] = {{1, 3, 2, 4}, {4, 2, 3, 1}, {2, 4, 1, 3}, {3, 1, 4, 2}};
+    // Problem 1
+    // Initialize 6 example matricies
+    int A[NUM][NUM] = {{1, 2, 3, 4}, {2, 1, 4, 3}, {3, 4, 1, 2}, {4, 3, 2, 1}};
+    int B[NUM][NUM] = {{1, 4, 2, 3}, {2, 3, 1, 4}, {3, 2, 4, 1}, {4, 1, 3, 2}};
+    int C[NUM][NUM] = {{1, 2, 4, 3}, {2, 1, 3, 4}, {3, 4, 2, 1}, {4, 3, 1, 2}};
+    int D[NUM][NUM] = {{1, 2, 3, 4}, {2, 1, 4, 3}, {4, 3, 2, 1}, {3, 4, 1, 2}};
+    int E[NUM][NUM] = {{1, 3, 2, 4}, {4, 2, 3, 1}, {3, 1, 4, 2}, {2, 4, 1, 3}};
+    int F[NUM][NUM] = {{1, 3, 2, 4}, {4, 2, 3, 1}, {2, 4, 1, 3}, {3, 1, 4, 2}};
 
-        printf("Enter a number 2 to 6 to compare the corresponding Latin square to 1\n\n");
-        // Label and print matricies
-        printf("1           2           3           4           5           6\n\n");
-        print_squares(A, B, C, D, E, F);
-        // Obtain user input for comparison to 1
-        int user_input;
-        printf("Compare 1 and ");
+    int user_input = 0;
+
+    printf("Enter a number 2 to 6 to compare the corresponding Latin square to 1\n\n");
+    // Label and print matricies
+    printf("1           2           3           4           5           6\n\n");
+    print_squares(A, B, C, D, E, F);
+    // Obtain user input for comparison to 1
+
+    while (user_input != -1)
+    {
+        printf("(-1 to quit) Compare 1 and ");
         scanf("%d", &user_input);
         printf("\n");
 
@@ -45,11 +49,15 @@ int main()
             print_pairs(A, F);
             break;
         default:
-            printf("Restart program and enter a number 2 to 6\n\n");
+            break;
         }
+    }
 
-        // Problem 2
+    // Problem 2
 
+    int flag = 0;
+    while (flag != -1)
+    {
         // Initialize variables
         int b, v, k, r, lambda;
 
@@ -60,9 +68,14 @@ int main()
         r = (b * k) / v;
         lambda = (r * (k - 1)) / (v - 1);
         if (b * k != v * r || (lambda * (v - 1) != r * (k - 1)))
-            printf("This is an impossible configuration!");
+            printf("This is an impossible configuration!\n");
         else
             printf("\n(b = %d | v = %d | k = %d | r = %d | lambda = %d)\n", b, v, k, r, lambda);
+
+        printf("Press any number to continue, -1 to quit: ");
+        scanf("%d", &flag);
+        printf("\n");
+    }
 
     return 0;
 }
@@ -92,7 +105,6 @@ void print_squares(int a[NUM][NUM], int b[NUM][NUM], int c[NUM][NUM], int d[NUM]
         printf("\n");
     }
     printf("\n");
-
 }
 
 // Print (aij, bij)
@@ -100,7 +112,7 @@ void print_pairs(int a[NUM][NUM], int b[NUM][NUM])
 {
     // Initialize array that holds count for each sum
     int sum[NUM + (NUM - 1)];
-    for (int c = 0; c < NUM + (NUM -1); c++)
+    for (int c = 0; c < NUM + (NUM - 1); c++)
         sum[c] = 0;
 
     // Label and print all pairs (aij, bij)
@@ -119,20 +131,17 @@ void print_pairs(int a[NUM][NUM], int b[NUM][NUM])
         printf("\n");
     }
     printf("\n");
-    for (int p = 0; p < NUM + (NUM -1); p++)
+    for (int p = 0; p < NUM + (NUM - 1); p++)
         if (sum[p] == 1)
             printf("Sum = %d occurs %d time\n", p + 2, sum[p]);
         else
             printf("Sum = %d occurs %d times\n", p + 2, sum[p]);
 
     if ((sum[NUM - NUM] == 1 && sum[NUM + (NUM - 2)] == 1) &&
-            (sum[NUM - (NUM - 1)] == 2 && sum[NUM + (NUM - 3)] == 2) &&
-            (sum[NUM - (NUM - 2)] == 3 && sum[NUM + (NUM - 4)] == 3) &&
-            sum[NUM - (NUM - 3)] == 4)
+        (sum[NUM - (NUM - 1)] == 2 && sum[NUM + (NUM - 3)] == 2) &&
+        (sum[NUM - (NUM - 2)] == 3 && sum[NUM + (NUM - 4)] == 3) &&
+        sum[NUM - (NUM - 3)] == 4)
         printf("\nThese two Latin squares are mutually orthogonal\n\n");
     else
         printf("\nThese two Latin squares are not mutually orthogonal\n\n");
-
 }
-
-
