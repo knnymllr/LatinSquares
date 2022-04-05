@@ -72,7 +72,7 @@ int main()
         else
             printf("\n(b = %d | v = %d | k = %d | r = %d | lambda = %d)\n", b, v, k, r, lambda);
 
-        printf("Press any number to continue, -1 to quit: ");
+        printf("(-1 to quit) Press any number to continue: ");
         scanf("%d", &flag);
         printf("\n");
     }
